@@ -353,11 +353,14 @@ $.fn.gridEditor = function( options ) {
         function createDetails(container, cssClasses) {
             var detailsDiv = $('<div class="ge-details" />');
 
-            $('<input class="ge-id" />')
-                .attr('placeholder', 'id')
-                .val(container.attr('id'))
-                .attr('title', 'Set a unique identifier')
-                .appendTo(detailsDiv)
+            var inputId = $('<input class="ge-id" />')
+                    .attr('placeholder', 'id')
+                    .val(container.attr('id'))
+                    .attr('title', 'Set a unique identifier')
+                    .on('blur', function() {
+                        container.attr('id', $(this).val());
+                    })
+                    .appendTo(detailsDiv)
             ;
 
             var classGroup = $('<div class="btn-group" />').appendTo(detailsDiv);
